@@ -1,0 +1,9 @@
+[package]
+name = "math-168"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+ndarray = "0.15.6"
+ndarray-linalg = { version = "0.16.0", features = ["openblas-static"] }
+petgraph = "0.6.4"
