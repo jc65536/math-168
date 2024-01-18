@@ -2,7 +2,7 @@ use ndarray::array;
 use ndarray_linalg::Eig;
 use petgraph::{dot::Config, graph::UnGraph};
 
-use crate::util::output_graph;
+use crate::util::OutputGraph;
 
 pub fn exercise7() {
     let a = array![
@@ -28,5 +28,5 @@ pub fn exercise7() {
         (3, 4),
     ]);
 
-    output_graph(&g, &[Config::EdgeNoLabel, Config::NodeNoLabel], "ex7.png");
+    g.output(&[Config::EdgeNoLabel, Config::NodeNoLabel], "ex7.png");
 }
