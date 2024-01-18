@@ -1,3 +1,5 @@
+use std::{process::{Command, Stdio}, fs::File};
+
 use ndarray::array;
 use ndarray_linalg::Eig;
 use petgraph::{
@@ -30,6 +32,12 @@ pub fn exercise7() {
     ]);
 
     let dot = Dot::with_config(&g, &[Config::EdgeNoLabel, Config::NodeNoLabel]);
+
+    let file = File::create("")
+
+    Command::new("dot")
+        .arg("-Tpng")
+        .stdout(Stdio::)
 
     println!("{:?}", dot);
 }
