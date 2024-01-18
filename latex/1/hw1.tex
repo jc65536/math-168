@@ -25,7 +25,6 @@
 
 \usepackage{parskip}
 \usepackage[T1]{fontenc}
-\usepackage{dot2texi}
 
 % Math commands
 \newcommand{\R}{\mathbb{R}} % Real numbers
@@ -321,25 +320,19 @@ The largest eigenvalue is \( \boxed{\sqrt{n - 1}} \).
 
 \begin{enumerate}
   \item[(a)]
+  Eigenvalues:
+  \begin{verbatim}
+3.749429478214337+0i
+-2.3540236479908256+0i
+-1.5423248829430551+0i
+0.14691905271954572+0i
+0.000000000000000021895643135715098+0i
+  \end{verbatim}
+
   \item[(b)]
-  \begin{dot2tex}
-    graph {
-        0 [ ]
-        1 [ ]
-        2 [ ]
-        3 [ ]
-        4 [ ]
-        0 -- 1 [ ]
-        0 -- 2 [ ]
-        0 -- 3 [ ]
-        0 -- 3 [ ]
-        0 -- 4 [ ]
-        1 -- 2 [ ]
-        1 -- 4 [ ]
-        2 -- 3 [ ]
-        3 -- 4 [ ]
-    }
-  \end{dot2tex}
+  Graph of the network:
+
+  \includegraphics{ex7.png}
 \end{enumerate}
 
 \newpage
