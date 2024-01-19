@@ -5,7 +5,7 @@ use std::{
     process::{Command, Stdio},
 };
 
-use ndarray::{Array2, ArrayBase, Array};
+use ndarray::Array2;
 use petgraph::{
     dot::{Config, Dot},
     visit::{GraphProp, IntoEdgeReferences, IntoNodeReferences, NodeIndexable},
@@ -37,11 +37,24 @@ where
     }
 }
 
-struct EdgeList<'a, T>(&'a [(T, T)]);
+pub struct EdgeIter<'a>(Box<dyn Iterator<Item = (u32, u32)> + 'a>);
 
-impl<'a, T> From<Array2<T>> for EdgeList<'a, T>
-{
-    fn from(value: Array2<T>) -> Self {
-        value.indexed_iter().flat_map(|((i, j), x)| (0..x));
+impl<'a> Iterator for EdgeIter<'a> {
+    type Item = (u32, u32);
+
+    fn next(&mut self) -> Option<Self::Item> {
+        self.0.next()
+    }
+}
+
+impl<'a, T: Into<usize> + Copy> From<&'a Array2<T>> for EdgeIter<'a> {
+    fn from(adj_matrix: &'a Array2<T>) -> Self {
+        Self(Box::new(
+            adj_matrix
+                .indexed_iter()
+                .filter(|((i, j), _)| i <= j)
+                .flat_map(|(edge, &x)| (0..x.into()).map(move |_| edge))
+                .map(|(i, j)| (i as u32, j as u32)),
+        ))
     }
 }
