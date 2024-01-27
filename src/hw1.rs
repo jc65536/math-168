@@ -19,5 +19,5 @@ pub fn ex7() {
     let a = a.map(|&f| f as usize);
     let g: UnGraph<(), ()> = UnGraph::from_edges(EdgeIter::from(&a));
 
-    g.output(&[Config::EdgeNoLabel, Config::NodeNoLabel], "ex7.png");
+    g.output_png(&[Config::EdgeNoLabel, Config::NodeNoLabel], "ex7.png");
 }

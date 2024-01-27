@@ -69,14 +69,21 @@
 
 \subsection*{Exercise 1}
 
-\begin{enumerate}
-  \item[(a)]
-  \item[(b)]
-\end{enumerate}
+Something that I'm personally interested in is language learning (I'm currently
+learning Japanese). In linguistics, sentences are broken down into syntax trees,
+which could be a type of network. Also, the evolution and dissipation of words
+and grammar across cultures could be modeled as a type of network, with clusters
+being major families of languages.
 
 \newpage
 
 \subsection*{Exercise 2}
+
+The network I picked was ``Global language network'' (2014). The network models
+what languages are co-spoken in order to determine the cultural influence and
+``connectivity'' of languages. It also considered things like book translations,
+which were modeled with directed edges. This network would not be simple since
+there can be loops.
 
 \newpage
 
@@ -254,5 +261,109 @@
 \newpage
 
 \subsection*{Exercise 4}
+
+From homework 1, we know that the largest positive eigenvalue is \( \sqrt{n - 1} \).
+\begin{gather*}
+  \begin{bmatrix}
+    0 & 1 & 1 & \dotso \\
+    1 & 0 & 0 & \dotso \\
+    1 & 0 & 0 & \dotso \\
+    \vdots & \vdots & \vdots & \ddots
+  \end{bmatrix}_{n \times n}
+  \begin{bmatrix}
+    x_1 \\ x_2 \\ \vdots \\ x_n
+  \end{bmatrix}
+  =
+  \sqrt{n - 1}
+  \begin{bmatrix}
+    x_1 \\ x_2 \\ \vdots \\ x_n
+  \end{bmatrix} \\
+  \begin{bmatrix}
+    x_2 + \dotsb + x_n \\ x_1 \\ \vdots \\ x_1
+  \end{bmatrix}
+  =
+  \sqrt{n - 1}
+  \begin{bmatrix}
+    x_1 \\ x_2 \\ \vdots \\ x_n
+  \end{bmatrix}
+\end{gather*}
+
+The eigenvector must be a multiple of
+\[
+  \begin{bmatrix}
+    \sqrt{n - 1} \\ 1 \\ 1 \\ \vdots
+  \end{bmatrix}
+\]
+
+Thus the eigenvalue centrality of the central node is \( \sqrt{n - 1} \), while
+the centralities of all other nodes are \( 1 \).
+
+The ratio of the centralities grows to \( \infty \) as \( n \) grows.
+
+\newpage
+
+\subsection*{Exercise 5}
+
+\begin{enumerate}
+  \item[(a)]
+  The sum of all degrees across all nodes must be even, because every edge
+  contributes 2 degrees to the total. However, if every node has an odd degree
+  and there are an odd number of nodes, then the total degree would be odd, so
+  this can't happen.
+
+  \item[(b)]
+  \begin{enumerate}
+    \item[(i)]
+    The average degree is \( 2(n - 1) / n \), since each edge contributes 2
+    degrees.
+
+    \item[(ii)]
+    The maximum degree of a node is \( n - 1 \), which would be the case in a
+    star graph.
+  \end{enumerate}
+\end{enumerate}
+
+\newpage
+
+\subsection*{Exercise 6}
+
+\begin{enumerate}
+  \item[(a)]
+  Color legend:
+
+\colorbox[HTML]{ffff00}{\color[HTML]{ffff00} 000} 0.15515212058233172 \\
+\colorbox[HTML]{79fa22}{\color[HTML]{79fa22} 000} 0.19112790743525504 \\
+\colorbox[HTML]{2bda76}{\color[HTML]{2bda76} 000} 0.23291367726777512 \\
+\colorbox[HTML]{21cc8c}{\color[HTML]{21cc8c} 000} 0.24357657972574295 \\
+\colorbox[HTML]{18b0ad}{\color[HTML]{18b0ad} 000} 0.2607469799096637 \\
+\colorbox[HTML]{1780d4}{\color[HTML]{1780d4} 000} 0.2853382990163877 \\
+\colorbox[HTML]{187dd6}{\color[HTML]{187dd6} 000} 0.28706058603799944 \\
+\colorbox[HTML]{2a40f2}{\color[HTML]{2a40f2} 000} 0.31587236726144907 \\
+\colorbox[HTML]{421cfb}{\color[HTML]{421cfb} 000} 0.336057214955234 \\
+\colorbox[HTML]{5010fd}{\color[HTML]{5010fd} 000} 0.3445678158339533 \\
+\colorbox[HTML]{6604fe}{\color[HTML]{6604fe} 000} 0.35647050186749607 \\
+\colorbox[HTML]{8000ff}{\color[HTML]{8000ff} 000} 0.36810446373525046
+
+  \includegraphics{ex6a.png}
+
+  \newpage
+  \item[(b)]
+  Color legend:
+
+\colorbox[HTML]{ffff00}{\color[HTML]{ffff00} 000} 4 \\
+\colorbox[HTML]{51f242}{\color[HTML]{51f242} 000} 5 \\
+\colorbox[HTML]{51f242}{\color[HTML]{51f242} 000} 5 \\
+\colorbox[HTML]{17afaf}{\color[HTML]{17afaf} 000} 6 \\
+\colorbox[HTML]{17afaf}{\color[HTML]{17afaf} 000} 6 \\
+\colorbox[HTML]{17afaf}{\color[HTML]{17afaf} 000} 6 \\
+\colorbox[HTML]{17afaf}{\color[HTML]{17afaf} 000} 6 \\
+\colorbox[HTML]{2942f2}{\color[HTML]{2942f2} 000} 7 \\
+\colorbox[HTML]{2942f2}{\color[HTML]{2942f2} 000} 7 \\
+\colorbox[HTML]{8000ff}{\color[HTML]{8000ff} 000} 8 \\
+\colorbox[HTML]{8000ff}{\color[HTML]{8000ff} 000} 8 \\
+\colorbox[HTML]{8000ff}{\color[HTML]{8000ff} 000} 8
+
+  \includegraphics{ex6b.png}
+\end{enumerate}
 
 \end{document}

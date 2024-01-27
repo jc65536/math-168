@@ -12,7 +12,8 @@ use petgraph::{
 };
 
 pub trait OutputGraph {
-    fn output<'a>(self, config: &'a [Config], filename: &str);
+    fn output_png<'a>(self, config: &'a [Config], filename: &str);
+    fn output_dot<'a>(self, config: &'a [Config], filename: &str);
 }
 
 impl<G> OutputGraph for G
@@ -21,7 +22,7 @@ where
     G::EdgeWeight: Debug,
     G::NodeWeight: Debug,
 {
-    fn output<'a>(self, config: &'a [Config], filename: &str) {
+    fn output_png<'a>(self, config: &'a [Config], filename: &str) {
         let dot = Dot::with_config(self, config);
 
         let file = File::create(format!("output/{filename}")).unwrap();
@@ -39,6 +40,14 @@ where
             .unwrap();
 
         write!(proc.stdin.unwrap(), "{dot:?}").unwrap();
+    }
+
+    fn output_dot<'a>(self, config: &'a [Config], filename: &str) {
+        let dot = Dot::with_config(self, config);
+
+        let mut file = File::create(format!("output/{filename}")).unwrap();
+
+        write!(file, "{dot:?}").unwrap();
     }
 }
 
