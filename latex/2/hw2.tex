@@ -57,7 +57,7 @@
 \newcommand{\angles}[1]{\left \langle #1 \right \rangle}
 \newcommand{\conj}[1]{\overline{#1}}
 
-\title{Homework Title}
+\title{Math 168 Homework 2}
 
 \author{Jason Cheng}
 
@@ -67,7 +67,7 @@
 
 \maketitle
 
-\subsection*{Problem No.}
+\subsection*{Exercise 1}
 
 \begin{enumerate}
   \item[(a)]
@@ -75,5 +75,184 @@
 \end{enumerate}
 
 \newpage
+
+\subsection*{Exercise 2}
+
+\newpage
+
+\subsection*{Exercise 3}
+
+\begin{enumerate}
+  \item[(a)]
+  \begin{gather*}
+    \begin{split}
+      \det(A - \lambda I) &= \det
+      \begin{pmatrix}
+        2 - \lambda & -1 \\
+        -1 & 2 - \lambda
+      \end{pmatrix} \\
+      &= (2 - \lambda)^2 - (-1)^2 \\
+      &= \lambda^2 - 4\lambda + 3 \\
+      &= (\lambda - 3)(\lambda - 1)
+    \end{split} \\
+    \boxed{\lambda_1 = 1, \lambda_2 = 3}
+  \end{gather*}
+
+  \begin{gather*}
+    A - 1I =
+    \begin{pmatrix}
+      1 & -1 \\
+      -1 & 1
+    \end{pmatrix}
+    \rightarrow
+    \begin{pmatrix}
+      1 & -1 \\
+      0 & 0
+    \end{pmatrix} \\
+    \ker(A - 1I) = \spn \set{(1, 1)}
+  \end{gather*}
+
+  The eigenvectors associated with \( \lambda_1 = 1 \) are \( \boxed{\spn
+  \set{(1, 1)}} \).
+
+  \begin{gather*}
+    A - 3I =
+    \begin{pmatrix}
+      -1 & -1 \\
+      -1 & -1
+    \end{pmatrix}
+    \rightarrow
+    \begin{pmatrix}
+      1 & 1 \\
+      0 & 0
+    \end{pmatrix} \\
+    \ker(A - 3I) = \spn \set{(1, -1)}
+  \end{gather*}
+
+  The eigenvectors associated with \( \lambda_2 = 3 \) are \( \boxed{\spn
+  \set{(1, -1)}} \).
+
+  \item[(b)]
+  \begin{enumerate}
+    \item[(i)]
+    \[ Ax = \lambda x \implies (-A)x = -(Ax) = -\lambda x \]
+
+    The eigenvalues of \( -A \) are \( -\lambda_1, -\lambda_2, \dotsc,
+    -\lambda_n \).
+
+    \item[(ii)]
+    \[ Ax = \lambda x \implies (A + I)x = Ax + Ix = \lambda x + x = (\lambda +
+    1)x \]
+
+    The eigenvalues of \( A + I \) are \( \lambda_1 + 1, \lambda_2 + 1, \dotsc,
+    \lambda_n + 1 \).
+  \end{enumerate}
+
+  \item[(c)]
+  The eigenvalues of \( B \) are its diagonal entries since \( B \) is upper
+  triangular. So the eigenvalues are 1, 2, and 3.
+
+  Geometric multiplicities
+  \begin{align*}
+    A - 1I &=
+    \begin{bmatrix}
+      0 & 6 & -4 & 5 \\
+      0 & 1 & 3 & 4 \\
+      0 & 0 & 0 & 3 \\
+      0 & 0 & 0 & 2
+    \end{bmatrix} \\
+    &\rightarrow
+    \begin{bmatrix}
+      0 & 0 & -22 & -19 \\
+      0 & 1 & 3 & 4 \\
+      0 & 0 & 0 & 3 \\
+      0 & 0 & 0 & 0
+    \end{bmatrix} \\
+    \dim(\ker(A - 1I)) &= 1
+  \end{align*}
+  \begin{align*}
+    A - 2I &=
+    \begin{bmatrix}
+      -1 & 6 & -4 & 5 \\
+      0 & 0 & 3 & 4 \\
+      0 & 0 & -1 & 3 \\
+      0 & 0 & 0 & 1
+    \end{bmatrix} \\
+    &\rightarrow
+    \begin{bmatrix}
+      -1 & 6 & -4 & 5 \\
+      0 & 0 & 0 & 13 \\
+      0 & 0 & -1 & 3 \\
+      0 & 0 & 0 & 1
+    \end{bmatrix} \\
+    &\rightarrow
+    \begin{bmatrix}
+      -1 & 6 & -4 & 5 \\
+      0 & 0 & 0 & 0 \\
+      0 & 0 & -1 & 3 \\
+      0 & 0 & 0 & 1
+    \end{bmatrix} \\
+    \dim(\ker(A - 2I)) &= 1
+  \end{align*}
+  \begin{align*}
+    A - 3I &=
+    \begin{bmatrix}
+      -2 & 6 & -4 & 5 \\
+      0 & -1 & 3 & 4 \\
+      0 & 0 & -2 & 3 \\
+      0 & 0 & 0 & 0
+    \end{bmatrix} \\
+    \dim(\ker(A - 3I)) &= 1
+  \end{align*}
+  The geometric multiplicity of all three eigenvalues is 1.
+
+  \item[(d)]
+  \( P \) is symmetric, so it is diagnoalizable.
+  \begin{align*}
+    \det(P - \lambda) I &= \det
+    \begin{pmatrix}
+      4 - \lambda & 0 & 0 & -1 \\
+      0 & 3 - \lambda & 0 & 0 \\
+      0 & 0 & 1 - \lambda & 0 \\
+      -1 & 0 & 0 & 4 - \lambda
+    \end{pmatrix} \\
+    &= (3 - \lambda) \det
+    \begin{pmatrix}
+      4 - \lambda & 0 & -1 \\
+      0 & 1 - \lambda & 0 \\
+      -1 & 0 & 4 - \lambda
+    \end{pmatrix} \\
+    &= (3 - \lambda)(1 - \lambda) \det
+    \begin{pmatrix}
+      4 - \lambda & -1 \\
+      -1 & 4 - \lambda
+    \end{pmatrix} \\
+    &= (3 - \lambda)(1 - \lambda)((4 - \lambda)^2 - (-1)^2) \\
+    &= (3 - \lambda)(1 - \lambda)(5 - \lambda)(3 - \lambda)
+  \end{align*}
+  The eigenvalues are \( 1, 3, 5 \). The geometric multiplicities of \( \lambda
+  = 1, 5 \) are 1, and the geometric multiplicity of \( \lambda = 3 \) is 2
+  since they have to be equal to the arithmetic multiplicities because \( P \)
+  is diagnoalizable.
+
+  \item[(e)]
+  \begin{gather*}
+    tr(L) = 2 + 3 + 3 + 2 = 10 \\
+    (-1) + 1 + \lambda_1 + \lambda_2 = 10 \\
+    \lambda_1 + \lambda_2 = 10 \\
+    (-1)(1)\lambda_1 \lambda_2 = -9 \\
+    \lambda_1 \lambda_2 = 9 \\
+    \boxed{
+      \begin{split}
+        \lambda_1 = 9 \\
+        \lambda_2 = 1
+      \end{split}
+    }
+  \end{gather*}
+\end{enumerate}
+
+\newpage
+
+\subsection*{Exercise 4}
 
 \end{document}

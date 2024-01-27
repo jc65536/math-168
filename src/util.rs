@@ -26,8 +26,13 @@ where
 
         let file = File::create(format!("output/{filename}")).unwrap();
 
-        let proc = Command::new(if self.is_directed() { "dot" } else { "neato" })
+        let proc = Command::new(if self.is_directed() { "dot" } else { "fdp" })
             .arg("-Tpng")
+            .arg("-Gsplines=true")
+            .arg("-Goverlap=false")
+            .arg("-Nshape=circle")
+            .arg("-Nfixedsize=true")
+            .arg("-Nwidth=0.4")
             .stdin(Stdio::piped())
             .stdout(file)
             .spawn()

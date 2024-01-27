@@ -1,6 +1,7 @@
 mod hw1;
+mod hw2;
 mod util;
 
 fn main() {
-    hw1::exercise7();
+    hw2::ex6();
 }

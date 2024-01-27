@@ -4,7 +4,7 @@ use petgraph::{dot::Config, graph::UnGraph};
 
 use crate::util::{EdgeIter, OutputGraph};
 
-pub fn exercise7() {
+pub fn ex7() {
     let a = array![
         [0., 1., 1., 2., 1.],
         [1., 0., 1., 0., 1.],
