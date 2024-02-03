@@ -7,3 +7,4 @@ edition = "2021"
 ndarray = "0.15.6"
 ndarray-linalg = { version = "0.16.0", features = ["openblas-static"] }
 petgraph = "0.6.4"
+rand = "0.8.5"

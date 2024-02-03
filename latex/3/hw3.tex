@@ -1,0 +1,295 @@
+% Uncomment for shell escape
+% \RequirePackage{shellesc}
+
+\documentclass{article}
+
+% Font
+\usepackage{mlmodern}
+
+% Margins
+\usepackage[margin=1in]{geometry}
+
+% Math symbols, proof environments
+\usepackage{amsmath, amsthm, amssymb}
+
+% Use this package for matrices
+\usepackage{array}
+
+% Images and positioning
+\usepackage{graphicx, float, tikz}
+
+% Trees
+\usepackage{forest}
+
+% Plots
+\usepackage{pgfplots}
+
+\usepackage{xcolor}
+
+\usepackage{parskip}
+\usepackage[T1]{fontenc}
+
+% Math commands
+\newcommand{\R}{\mathbb{R}} % Real numbers
+\newcommand{\Z}{\mathbb{Z}} % Integers
+\newcommand{\C}{\mathbb{C}} % Complex numbers
+\newcommand{\Pow}{\mathcal{P}}
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\setc}[2]{\left\{ #1 \middle| #2 \right\}}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\var}{\mathrm{VAR}}
+\newcommand{\ut}[1]{\text{ #1}}
+\newcommand{\cov}{\mathrm{COV}}
+\newcommand{\intR}{\int_{-\infty}^{\infty}}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\blu}[1]{\textcolor{blue}{#1}}
+\newcommand{\grn}[1]{\textcolor{green}{#1}}
+\newcommand{\contradiction}{\Rightarrow\!\Leftarrow}
+\newcommand{\fun}{\mathrm{Fun}}
+
+\DeclareMathOperator{\pMat}{Mat}
+\newcommand{\Mat}[2]{\pMat_{#1 \times #2}}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\nul}{null}
+\DeclareMathOperator{\tr}{tr}
+\newcommand{\angles}[1]{\left \langle #1 \right \rangle}
+\newcommand{\conj}[1]{\overline{#1}}
+
+\title{Math 168 Homework 3}
+
+\author{Jason Cheng}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Exercise 1}
+
+Post: @73.
+
+\newpage
+
+\subsection*{Exercise 2}
+
+Commented on post @70.
+
+\newpage
+
+\subsection*{Exercise 3}
+
+\begin{enumerate}
+  \item[(a)]
+  The degree centrality of node 1 is \( \boxed{0} \), and the degree centrality
+  of every other node is \( \boxed{1} \).
+
+  \item[(b)]
+  The adjacency matrix looks like this:
+  \[
+    A =
+    \begin{bmatrix}
+      0 & 0 & 0 & 0 \\
+      1 & 0 & 0 & 0 \\
+      0 & 1 & 0 & 0 \\
+      0 & 0 & 1 & 0
+    \end{bmatrix}
+  \]
+
+  This is triangular, so we see that the only eigenvalue is 0.
+
+  The eigenvector associated with \( \lambda = 0 \) is \(
+    \begin{bmatrix}
+      0 & \dotso & 0 & 1
+    \end{bmatrix}^t
+  \)
+
+  Thus the eigenvalue centrality of every node except node \( n \) is \(
+  \boxed{0} \), and the eigenvalue centrality of node \( n \) is \( \boxed{1}
+  \).
+
+  \item[(c)]
+  \begin{gather*}
+    (I - \alpha A)x = \vec{1} \\
+    \begin{bmatrix}
+      1 & 0 & 0 & 0 \\
+      -\alpha & 1 & 0 & 0 \\
+      0 & -\alpha & 1 & 0 \\
+      0 & 0 & -\alpha & 1 \\
+    \end{bmatrix}
+    x = \vec{1} \\
+    \begin{bmatrix}
+      x_1 \\
+      -\alpha x_1 + x_2 \\
+      -\alpha x_2 + x_3 \\
+      -\alpha x_4 + x_4
+    \end{bmatrix}
+    = \vec{1} \\
+    \begin{bmatrix}
+      x_1 \\ x_2 \\ x_3 \\ x_4
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      1 \\ 1 + \alpha \\ 1 + \alpha + \alpha^2 \\ 1 + \alpha + \alpha^2 + \alpha^3
+    \end{bmatrix}
+  \end{gather*}
+
+  (we must choose \( \alpha < 1 \) for convergence)
+
+  The Katz centrality of node \( i \) is
+  \[ \boxed{
+    \frac{1 - \alpha^i}{1 - \alpha}
+  } \]
+
+\end{enumerate}
+
+\newpage
+
+\subsection*{Exercise 4}
+
+\begin{align*}
+  C &= \frac{n}{\sum_{j} d_{ij}} \\
+  &= \frac{n}{2 \cdot (1 + 2 + \dotsb + ((n - 1) / 2 - 1)) + (n - 1) / 2} \\
+  &= \frac{n}{((n - 1) / 2)((n - 1) / 2 - 1) + (n - 1) / 2} \\
+  &= \frac{n}{((n - 1) / 2)((n - 1) / 2)} \\
+  &= \boxed{\frac{4n}{(n - 1)^2}}
+\end{align*}
+
+\newpage
+
+\subsection*{Exercise 5}
+
+Central node
+\begin{align*}
+  x_1 &= \sum_{st} n^1_{st} \\
+  &= \sum_{st}
+  \begin{cases}
+    1, & s \ne t \lor s = t = 1 \\
+    0, & \text{otherwise}
+  \end{cases} \\
+  &= \boxed{n^2 - n + 1}
+\end{align*}
+
+Other nodes
+\begin{align*}
+  x_i &= \sum_{st} n^i_{st} \\
+  &= \sum_{st}
+  \begin{cases}
+    1, & s = i \lor t = i \\
+    0, & \text{otherwise}
+  \end{cases} \\
+  &= \boxed{2n - 1}
+\end{align*}
+
+\newpage
+
+\subsection*{Exercise 6}
+
+For each node \( j \) in the left half, the shortest path to node 2 is \( d_{2j}
+= d_{1j} + 1 \) since it must pass through the edge \( (1, 2) \). Likewise, for
+each node \( k \) in the right half, the shortest path to node 1 is \( d_{1k} =
+d_{2k} + 1 \).
+
+\begin{align*}
+  C_1 &= \frac{n}{\sum_{j} d_{1j} + \sum_{k} d_{1k}} \\
+  &= \frac{n}{\sum_{j} d_{1j} + \sum_{k} (d_{2k} + 1)} \\
+  &= \frac{n}{\sum_{j} d_{1j} + \sum_{k} d_{2k} + n_2} \\
+  C_2 &= \frac{n}{\sum_{j} d_{2j} + \sum_{k} d_{2k}} \\
+  &= \frac{n}{\sum_{j} (d_{1j} + 1) + \sum_{k} d_{2k}} \\
+  &= \frac{n}{\sum_{j} d_{1j} + n_1 + \sum_{k} d_{2k}} \\
+\end{align*}
+
+\begin{align*}
+  \frac{1}{C_1} + \frac{n_1}{n}
+  &= \frac{\sum_{j} d_{1j} + \sum_{k} d_{2k} + n_2}{n} + \frac{n_1}{n} \\
+  &= \frac{\sum_{j} d_{1j} + \sum_{k} d_{2k} + n_1}{n} + \frac{n_2}{n} \\
+  &= \frac{1}{C_2} + \frac{n_2}{n}
+\end{align*}
+
+\qed
+
+\newpage
+
+\subsection*{Exercise 7}
+
+\begin{enumerate}
+  \item[(a)]
+  \( (A^3)_{ii} \) is the number of paths of length 3 from node \( i \) to
+  itself. A path of length 3 would be a triangle starting and ending at node \(
+  i \). However, we overcount the number of triangles by a factor of 6, because
+  for the same triangle we could count 6 different paths: for each of the 3
+  vertices, we can count 2 paths in different directions.
+
+  \item[(b)]
+  Number of 2-paths:
+  \begin{align*}
+    \sum_{ij} (A^2)_{ij} - \sum_{i} (A^2)_{ii}
+  \end{align*}
+
+  \item[(c)]
+  \begin{align*}
+    C &= \frac{\sum_{i} (A^3)_{ii}}{\sum_{ij} (A^2)_{ij} - \sum_{i} (A^2)_{ii}} \\
+    &= \boxed{0.6666666666666666}
+  \end{align*}
+\end{enumerate}
+
+\newpage
+
+\subsection*{Exercise 8}
+
+Legend:
+
+\(
+  \begin{array}{ll}
+    \text{x-axis} & n \\
+    \text{y-axis} & C \\
+    \text{Blue square} & p = 0.05 \\
+    \text{Red triangle} & p = 0.1 \\
+    \text{Black circle} & p = 0.2
+  \end{array}
+\)
+
+\begin{tikzpicture}[scale=1.5]
+\begin{axis}
+  \addplot [
+    scatter,
+    only marks,
+    point meta=explicit symbolic,
+    scatter/classes={
+      0.05={mark=square*,blue},
+      0.1={mark=triangle*,red},
+      0.2={mark=o,draw=black}% <-- don't add comma
+    },
+  ] table [meta=p] {
+n C p
+5 0 0.05
+10 0 0.05
+15 0 0.05
+20 0 0.05
+25 0 0.05
+30 0 0.05
+35 0.04838709677419355 0.05
+40 0 0.05
+5 0 0.1
+10 0 0.1
+15 0 0.1
+20 0.16216216216216217 0.1
+25 0.14285714285714285 0.1
+30 0.1 0.1
+35 0.08275862068965517 0.1
+40 0.06687898089171974 0.1
+5 0 0.2
+10 0.3333333333333333 0.2
+15 0.3 0.2
+20 0.24444444444444444 0.2
+25 0.23684210526315788 0.2
+30 0.18202247191011237 0.2
+35 0.18358208955223881 0.2
+40 0.18271119842829076 0.2
+  };
+\end{axis}
+\end{tikzpicture}
+
+\end{document}

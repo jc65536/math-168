@@ -315,6 +315,7 @@ dependencies = [
  "ndarray",
  "ndarray-linalg",
  "petgraph",
+ "rand",
 ]
 
 [[package]]

@@ -1,7 +1,8 @@
 mod hw1;
 mod hw2;
+mod hw3;
 mod util;
 
 fn main() {
-    hw2::ex6();
+    hw3::ex8();
 }
