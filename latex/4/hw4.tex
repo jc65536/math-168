@@ -1,0 +1,157 @@
+% Uncomment for shell escape
+% \RequirePackage{shellesc}
+
+\documentclass{article}
+
+% Font
+\usepackage{mlmodern}
+
+% Margins
+\usepackage[margin=1in]{geometry}
+
+% Math symbols, proof environments
+\usepackage{amsmath, amsthm, amssymb}
+
+% Use this package for matrices
+\usepackage{array}
+
+% Images and positioning
+\usepackage{graphicx, float, tikz}
+
+% Trees
+\usepackage{forest}
+
+% Plots
+\usepackage{pgfplots}
+
+\usepackage{xcolor}
+
+\usepackage{parskip}
+\usepackage[T1]{fontenc}
+
+% Math commands
+\newcommand{\R}{\mathbb{R}} % Real numbers
+\newcommand{\Z}{\mathbb{Z}} % Integers
+\newcommand{\C}{\mathbb{C}} % Complex numbers
+\newcommand{\Pow}{\mathcal{P}}
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\setc}[2]{\left\{ #1 \middle| #2 \right\}}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\var}{\mathrm{VAR}}
+\newcommand{\ut}[1]{\text{ #1}}
+\newcommand{\cov}{\mathrm{COV}}
+\newcommand{\intR}{\int_{-\infty}^{\infty}}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\blu}[1]{\textcolor{blue}{#1}}
+\newcommand{\grn}[1]{\textcolor{green}{#1}}
+\newcommand{\contradiction}{\Rightarrow\!\Leftarrow}
+\newcommand{\fun}{\mathrm{Fun}}
+
+\DeclareMathOperator{\pMat}{Mat}
+\newcommand{\Mat}[2]{\pMat_{#1 \times #2}}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\nul}{null}
+\DeclareMathOperator{\tr}{tr}
+\newcommand{\angles}[1]{\left \langle #1 \right \rangle}
+\newcommand{\conj}[1]{\overline{#1}}
+
+\title{Math 168 Homework 4}
+
+\author{Jason Cheng}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Exercise 1}
+
+\begin{enumerate}
+  \item[(a)]
+  Given an E-R graph, we can choose \( \binom{n}{3} \) sets of 3 nodes. The
+  probability that each set of 3 nodes is a triangle is \( p^3 \). Thus, the
+  expected number of triangles is
+  \begin{align*}
+    \binom{n}{3} p^3 = \frac{n(n - 1)(n - 2)p^3}{6}
+  \end{align*}
+  In the limit of large \( n \), we have
+  \begin{align*}
+    \lim_{n \to \infty} \frac{n(n - 1)(n - 2)p^3}{6}
+    &= \lim_{n \to \infty} \frac{(n - 1 - 1)p \cdot (n - 1 + 1)p \cdot (n - 1)p}{6} \\
+    &= \lim_{n \to \infty} \frac{((n - 1)p - p)((n - 1)p + p)(n - 1)p}{6} \\
+    &= \lim_{n \to \infty} \frac{(c - p)(c + p)c}{6} \\
+    &= \lim_{n \to \infty} \frac{c^3 - cp^2}{6} \\
+    &= \lim_{n \to \infty} \frac{c^3 - 0}{6} && \lim_{n \to \infty} cp^2 = 0 \\
+    &= \frac{c^3}{6}
+  \end{align*}
+
+  \item[(b)]
+  We can choose a set of 3 nodes in \( \binom{n}{3} \) ways and pick a middle
+  node in 3 ways. For each set, the probability that they are a connected triple
+  is \( p^2 \). The expected number of connected triples is
+  \begin{align*}
+    3 \binom{n}{3} p^2 &= \frac{1}{2} n(n - 1)(n - 2)p^2 \\
+    &= \frac{1}{2} (n - 1 - 1)(n - 1 + 1)(n - 1)p^2 \\
+    &= \frac{1}{2} ((n - 1)^2 - 1)(n - 1)p^2 \\
+    &= \frac{1}{2} ((n - 1)^3 p^2 - (n - 1) p^2) \\
+    &= \frac{1}{2} ((n - 1)c^2 - cp)
+  \end{align*}
+
+  In the limit of large \( n \), this becomes \( (n - 1)c^2 / 2 \), since \( cp
+  \) goes to 0.
+
+  \item[(c)]
+  \begin{align*}
+    \frac{3 \cdot c^3 / 6}{(n - 1)c^2 / 2} = \frac{c^3}{(n - 1)c^2} = \boxed{\frac{c}{n
+    - 1}}
+  \end{align*}
+\end{enumerate}
+
+\newpage
+
+\subsection*{Exercise 2}
+
+\begin{enumerate}
+  \item[(a)]
+  Total number of edges
+  \begin{align*}
+    3 \binom{n}{3} p &= 3 \binom{n}{3} \frac{c}{\binom{n - 1}{2}} \\
+    &= 3 \cdot \frac{n(n - 1)(n - 2)}{6} \cdot \frac{2c}{(n - 1)(n - 2)} \\
+    &= nc
+  \end{align*}
+
+  Sum of all node degrees would be \( 2nc \), so the expected degree would be \(
+  2nc / n = \boxed{2c} \).
+
+  \item[(b)]
+  Every time we add a triangle, we add 2 degrees to each vertex of the triangle.
+  Thus all nodes have even degree.
+
+  Every node is considered for \( \binom{n - 1}{2} \) potential triangles
+  independently. Each time it is considered, it has a probability of \( p \) to
+  add 2 degrees. For each consideration, let \( X \) be the number of added
+  degrees.
+  \begin{gather*}
+    p_X(2) = p \\
+    p_X(0) = 1 - p
+  \end{gather*}
+
+  Aggregating the \( \binom{n - 1}{2} \) events, let \( Y \) be the number of
+  degrees of a node.
+  \begin{align*}
+    p_Y(2k) &= \binom{n}{k} p^k (1 - p)^{n - k} \\
+    &= \frac{n!}{k! (n - k)!} \left( \frac{c}{\binom{n - 1}{2}} \right)^k \left(
+    1 - \frac{c}{\binom{n - 1}{2}} \right)^{n - k} \\
+    &= \frac{c^k}{k!} \cdot \frac{n!}{(n - k)!} \cdot \left( \frac{2}{(n - 1)(n
+    - 2)} \right)^k \left( 1 - \frac{2c}{(n - 1)(n - 2)} \right)^{n - k}
+  \end{align*}
+\end{enumerate}
+
+\newpage
+
+\subsection*{Exercise 3}
+
+\end{document}
