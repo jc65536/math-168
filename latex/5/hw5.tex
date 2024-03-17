@@ -1,0 +1,315 @@
+% Uncomment for shell escape
+% \RequirePackage{shellesc}
+
+\documentclass{article}
+
+% Font
+\usepackage{mlmodern}
+
+% Margins
+\usepackage[margin=1in]{geometry}
+
+% Math symbols, proof environments
+\usepackage{amsmath, amsthm, amssymb}
+
+% Use this package for matrices
+\usepackage{array}
+
+% Images and positioning
+\usepackage{graphicx, float, tikz}
+
+% Trees
+\usepackage{forest}
+
+% Plots
+\usepackage{pgfplots}
+
+\usepackage{xcolor}
+
+\usepackage{parskip}
+\usepackage[T1]{fontenc}
+
+% Math commands
+\newcommand{\R}{\mathbb{R}} % Real numbers
+\newcommand{\Z}{\mathbb{Z}} % Integers
+\newcommand{\C}{\mathbb{C}} % Complex numbers
+\newcommand{\Pow}{\mathcal{P}}
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\setc}[2]{\left\{ #1 \middle| #2 \right\}}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\var}{\mathrm{VAR}}
+\newcommand{\ut}[1]{\text{ #1}}
+\newcommand{\cov}{\mathrm{cov}}
+\newcommand{\intR}{\int_{-\infty}^{\infty}}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\blu}[1]{\textcolor{blue}{#1}}
+\newcommand{\grn}[1]{\textcolor{green}{#1}}
+\newcommand{\contradiction}{\Rightarrow\!\Leftarrow}
+\newcommand{\fun}{\mathrm{Fun}}
+
+\DeclareMathOperator{\pMat}{Mat}
+\newcommand{\Mat}[2]{\pMat_{#1 \times #2}}
+\DeclareMathOperator{\spn}{span}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\nul}{null}
+\DeclareMathOperator{\tr}{tr}
+\newcommand{\angles}[1]{\left \langle #1 \right \rangle}
+\newcommand{\conj}[1]{\overline{#1}}
+\DeclareMathOperator{\cpoly}{char}
+\newcommand{\innerp}[2]{\left \langle #1, #2 \right \rangle}
+\newcommand{\norm}[1]{\left| \left| #1 \right| \right|}
+
+\title{Math 168 Homework 5}
+
+\author{Jason Cheng}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Exercise 2}
+
+\begin{enumerate}
+  \item[(a)]
+  \newcommand{\kin}{k^{\text{in}}}
+  \newcommand{\kout}{k^{\text{out}}}
+  \newcommand{\akin}{\angles{\kin}}
+  \newcommand{\akout}{\angles{\kout}}
+  \( \sum \kin = \sum \kout \), since every in degree corresponds to an out
+  degree on another node. We also have \( \sum \kin = n \akin \) and \( \sum
+  \kout = n \akout \). Thus \( \akin = \akout \). Furthermore, \( \sum \kin +
+  \sum \kout = 2m \), since the total degree is twice the number of edges.
+  Therefore, \( 2m = n \akin + n \akout = 2n \akin \).
+
+  \item[(b)]
+  Assuming \( \kout_i, \kin_j \) are nonzero.
+
+  The probability that a stub from node \( i \) is connected to node \( j \) is
+  \[ \frac{\kin_j}{2m - 1} \]
+
+  The total probability that node \( i \) is connected to node \( j \) is then
+  \[ \frac{\kout_i \kin_j}{2m - 1} \approx \frac{\kout_i \kin_j}{2m} \]
+
+  \item[(c)]
+  The probability that two nodes \( i, j \) are reciprocal is
+  \begin{align*}
+    \frac{\kin_i \kout_i}{2m} \cdot \frac{\kin_j \kout_j}{2m}
+  \end{align*}
+
+  The expected number of reciprocal pairs is
+  \begin{align*}
+    &\frac{1}{2} \left( \sum_{i = 1}^{n} \sum_{j = 1}^{n} \frac{\kin_i \kout_i}{2m} \cdot \frac{\kin_j \kout_j}{2m} - \sum_{i = 1}^{n} \frac{(\kin_i \kout_i)^2}{4m^2} \right) \\
+    &= \frac{1}{2} \left( \sum_{i = 1}^{n} \frac{\kin_i \kout_i}{2m} \sum_{j = 1}^{n} \frac{\kin_j \kout_j}{2m} - \sum_{i = 1}^{n} \frac{(\kin_i \kout_i)^2}{4m^2} \right) \\
+    &= \frac{1}{2} \left( \sum_{i = 1}^{n} \frac{\kin_i \kout_i}{2n \akin} \sum_{j = 1}^{n} \frac{\kin_j \kout_j}{2n \akin} - \sum_{i = 1}^{n} \frac{(\kin_i \kout_i)^2}{4m^2} \right) \\
+  \end{align*}
+  \begin{align*}
+    \sum_{j = 1}^{n} \frac{\kin_j \kout_j}{2n \akin}
+    &= \frac{\sum_j \kin_j \kout_j}{2 \sum_{p} \kin_p}
+  \end{align*}
+
+  TODO
+\end{enumerate}
+
+\newpage
+
+\subsection*{Exercise 3}
+
+\begin{enumerate}
+  \item[(a)]
+  \begin{align*}
+    q_k = \frac{(k + 1) p_{k + 1}}{\angles{k}}
+  \end{align*}
+  \begin{align*}
+    g_1(z) &= \sum_{k = 0}^{\infty} q_k z^k \\
+    &= \sum_{k = 0}^{\infty} \frac{(k + 1) p_{k + 1}}{\angles{k}} z^k \\
+    &= \frac{1}{\angles{k}} \sum_{k = 0}^{\infty} (k + 1) p_{k + 1} z^k \\
+    &= \frac{1}{\angles{k}} \sum_{k = 0}^{\infty} p_{k + 1} \left( \frac{d}{dz} z^{k + 1} \right) \\
+    &= \frac{1}{\angles{k}} \frac{d}{dz} \left( \sum_{k = 0}^{\infty} p_{k + 1} z^{k + 1} \right) \\
+    &= \frac{1}{\angles{k}} \frac{d}{dz} (g_0(z) - p_0 z^0) \\
+    &= \frac{1}{\angles{k}} g_0'(z) \\
+    &= \left( \sum_{k = 0}^{\infty} k p_k \right)^{-1} g_0'(z) \\
+    &= \left( \sum_{k = 0}^{\infty} k p_k 1^{k - 1} \right)^{-1} g_0'(z) \\
+    &= \left( g_0'(1) \right)^{-1} g_0'(z) \\
+    &= \frac{g_0'(z)}{g_0'(1)}
+  \end{align*}
+
+  \item[(b)]
+  \begin{align*}
+    g_0(z) &= \sum_{k = 0}^{\infty} p_k z^k \\
+    &= \sum_{k = 0}^{\infty} e^{-c} \frac{c^k}{k!} z^k \\
+    &= e^{-c} \sum_{k = 0}^{\infty} \frac{(cz)^k}{k!} \\
+    &= e^{-c} e^{cz} \\
+    &= \boxed{e^{c(z - 1)}}
+  \end{align*}
+
+  \begin{align*}
+    g_1(z) &= \frac{g_0'(z)}{g_0'(1)} \\
+    &= \frac{e^{c(z - 1)} c}{e^{c(1 - 1)} c} \\
+    &= \frac{e^{c(z - 1)} c}{c} \\
+    &= e^{c(z - 1)}
+  \end{align*}
+
+  This means the excess degree distribution is equal to the degree distribution.
+  In other words, there is no friendship paradox, since your friends are
+  expected to have the same amount of friends as yourself.
+
+  \item[(c)]
+  \begin{enumerate}
+    \item[(i)]
+    \begin{align*}
+      p_k =
+      \begin{cases}
+        1, & k = k_0 \\
+        0, & k \ne k_0
+      \end{cases}
+    \end{align*}
+
+    This is the unit impulse, whose pgf is \( g_0(z) = z^{k_0} \). Using the
+    formula from part a, we get
+    \begin{align*}
+      g_1(z) &= \frac{g_0'(z)}{g_0'(1)} \\
+      &= \frac{k_0 z^{k_0 - 1}}{k_0 \cdot 1^{k_0 - 1}} \\
+      &= z^{k_0 - 1}
+    \end{align*}
+    And this pgf corresponds to the probability distribution
+    \begin{align*}
+      q_k =
+      \begin{cases}
+        1, & k = k_0 - 1 \\
+        0, & k \ne k_0 - 1
+      \end{cases}
+    \end{align*}
+
+    which claims that the excess degree of every node is \( k_0 - 1 \). The
+    formula from part a is correct, and this makes sense, because if every node
+    has \( k_0 \) neighbors, one would expect one's neighbors to have \( k_0 - 1
+    \) other neighbors.
+
+    \item[(ii)]
+    If \( k_0 \ge 3 \), then we have
+    \begin{gather*}
+      u = g_1(u) \\
+      u = u^{k_0 - 1} \\
+      u = 0
+    \end{gather*}
+    We ignore the trivial solution \( u = 1 \).
+    \begin{align*}
+      S &= 1 - g_0(u) \\
+      &= 1 - 0^{k_0} \\
+      &= 1
+    \end{align*}
+  \end{enumerate}
+\end{enumerate}
+
+\newpage
+
+\subsection*{Exercise 4}
+
+\begin{enumerate}
+  \item[(a)]
+  Given a random edge, the probability that it leads to node \( i \) is
+  \[ p(i) = \frac{k_i}{2m - 1} \approx \frac{k_i}{2m} \]
+
+  Thus, the expected value of the destination node of a random edge is
+  \begin{align*}
+    \angles{x}_{\text{edge}} &= \sum_i x_i p(i) \\
+    &= \frac{1}{2m} \sum_i k_i x_i
+  \end{align*}
+
+  \item[(b)]
+  Note that
+  \[ 2m = \sum_i k_i \]
+
+  Thus
+  \begin{align*}
+    \angles{x}_{\text{edge}} - \angles{x} &= \frac{1}{\sum_i k_i} \sum_i k_i x_i - \angles{x} \\
+    &= \frac{1}{\sum_i k_i} \sum_i k_i x_i - \frac{1}{n} \sum_i x_i \\
+    &= \frac{1}{1 / n \cdot \sum_i k_i} \cdot \frac{1}{n} \sum_i k_i x_i - \frac{1}{n} \sum_i x_i \\
+    &= \frac{\angles{kx}}{\angles{k}} - \angles{x} \\
+    &= \frac{\angles{kx} - \angles{x} \angles{k}}{\angles{k}} \\
+    &= \frac{\cov(k, x)}{\angles{k}} \\
+  \end{align*}
+\end{enumerate}
+
+\newpage
+
+\subsection*{Exercise 5}
+
+\begin{enumerate}
+  \item[(a)]
+  \begin{align*}
+    g_0(z) &= \sum_{k = 0}^{\infty} (1 - a) a^k z^k \\
+    &= (1 - a) \frac{1}{1 - az} \\
+    &= \frac{1 - a}{1 - az} \\
+    g_0'(z) &= (1 - a)(-1)(1 - az)^{-2} (-a) \\
+    &= \frac{a(1 - a)}{(1 - az)^2} \\
+    g_0'(1) &= \frac{a}{1 - a} \\
+    g_1(z) &= \frac{g_0'(z)}{g_0'(1)} \\
+    &= \frac{(1 - a)^2}{(1 - az)^2}
+  \end{align*}
+  According to eq. 12.30, \( u = g_1(u) \), so
+  \begin{gather*}
+    u = g_1(u) \\
+    u = \frac{(1 - a)^2}{(1 - au)^2} \\
+    u(1 - 2au + a^2 u^2) = (1 - a)^2 \\
+    a^2 u^3 - 2au^2 + u - (1 - a)^2 = 0
+  \end{gather*}
+
+  \item[(b)]
+  Simply multiply the two factors to get the original equation:
+  \begin{gather*}
+    (u - 1)(a^2 u^2 - a(2 - a)u + (1 - a)^2) = 0 \\
+    a^2 u^3 - a(2 - a)u^2 + (1 - a)^2 u - a^2 u^2 + a(2 - a)u - (1 - a)^2 = 0 \\
+    a^2 u^3 + (-2a + a^2) u^2 + (1 - 2a + a^2) u - a^2 u^2 + (2a - a^2) u - (1 - a)^2 = 0 \\
+    a^2 u^3 - 2au^2 + u - (1 - a)^2 = 0
+  \end{gather*}
+  Thus the nontrivial solution satisfies \( a^2 u^2 - a(2 - a)u + (1 - a)^2 = 0
+  \).
+
+  \item[(c)]
+  \begin{align*}
+    u &= \frac{a(2 - a) - \sqrt{a^2 (2 - a)^2 - 4a^2 (1 - a)^2}}{2a^2} \\
+    &= \frac{a(2 - a) - \sqrt{(a(2 - a) - 2a(1 - a))(a(2 - a) + 2a(1 - a))}}{2a^2} \\
+    &= \frac{a(2 - a) - \sqrt{a^2 (4a - 3a^2)}}{2a^2} \\
+    &= \frac{2 - a - \sqrt{4a - 3a^2}}{2a}
+  \end{align*}
+  \begin{align*}
+    S &= 1 - g_0(u) \\
+    &= 1 - \frac{1 - a}{1 - (2 - a - \sqrt{4a - 3a^2}) / 2} \\
+    &= 1 - \frac{1 - a}{1 - (1 - a / 2 - \sqrt{a - 3a^2 / 4})} \\
+    &= 1 - \frac{1 - a}{a / 2 + \sqrt{a - 3a^2 / 4}} \\
+    &= 1 - \frac{(1 - a)(a / 2 - \sqrt{a - 3a^2 / 4})}{a^2 / 4 - a + 3a^2 / 4} \\
+    &= 1 - \frac{(1 - a)(a / 2 - \sqrt{a - 3a^2 / 4})}{a^2 - a} \\
+    &= 1 + \frac{a / 2 - \sqrt{a - 3a^2 / 4}}{a} \\
+    &= 1 + \frac{1}{2} - \sqrt{\frac{1}{a} - \frac{3}{4}} \\
+    &= \frac{3}{2} - \sqrt{a^{-1} - \frac{3}{4}}
+  \end{align*}
+
+  \item[(d)]
+  If \( a \le 1 / 3 \), then
+  \begin{gather*}
+    a^{-1} \ge 3 \\
+    \sqrt{a^{-1} - \frac{3}{4}} \ge \frac{3}{2} \\
+    S = \frac{3}{2} - \sqrt{a^{-1} - \frac{3}{4}} \le 0
+  \end{gather*}
+  So the GC would not exist (since the fraction of nodes in the GC is not
+  positive).
+\end{enumerate}
+
+\newpage
+
+\subsection*{Exercise 6}
+
+\begin{enumerate}
+  \item[(a)]
+  The diameter would be the shortest path from one end of the circle to the
+  opposite end. Since we can jump across \( c / 2 \) neighbors, this distance is
+  \( (n / 2) / (c / 2) = \boxed{n / c} \).
+
+  \item[(b)]
+\end{enumerate}
+
+\end{document}

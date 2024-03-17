@@ -1,0 +1,255 @@
+% Uncomment for shell escape
+% \RequirePackage{shellesc}
+
+\documentclass{article}
+
+% Font
+\usepackage{mlmodern}
+
+% Margins
+\usepackage[margin=1in]{geometry}
+
+% Math symbols, proof environments
+\usepackage{amsmath, amsthm, amssymb}
+
+% Use this package for matrices
+\usepackage{array}
+
+% Images and positioning
+\usepackage{graphicx, float, tikz}
+
+% Trees
+\usepackage{forest}
+
+% Plots
+\usepackage{pgfplots}
+
+\usepackage{xcolor}
+
+\usepackage{parskip}
+\usepackage[T1]{fontenc}
+
+% My definitions
+\usepackage{mathdefs}
+
+\title{Math 168 Homework 6}
+
+\author{Jason Cheng}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Exercise 1}
+
+\begin{enumerate}
+  \item[(a)]
+  \begin{gather*}
+    p_q = \frac{1}{2} (q p_{q - 1} - (q + 1) p_q) \\
+    p_0 = 1 - \frac{p_0}{2}
+  \end{gather*}
+
+  \item[(b)]
+  \begin{gather*}
+    g_0'(z) = \sum_{q = 0}^{\infty} q p_q z^{q - 1} \\
+    zg_0'(z) = \sum_{q = 0}^{\infty} q p_q z^q \\
+    zg_0'(z) + g_0(z) = \sum_{q = 0}^{\infty} (q + 1) p_q z^q \\
+    \begin{aligned}
+      (z - 1)(zg_0'(z) + g_0(z)) &= \sum_{q = 0}^{\infty} (q + 1) p_q z^q (z - 1) \\
+      &= \sum_{q = 0}^{\infty} ((q + 1) p_q z^{q + 1} - (q + 1) p_q z^q) \\
+      &= \sum_{q = 1}^{\infty} q p_{q - 1} z^q - \sum_{q = 0}^{\infty} (q + 1) p_q z^q \\
+      &= \sum_{q = 1}^{\infty} q p_{q - 1} z^q - \sum_{q = 1}^{\infty} (q + 1) p_q z^q - p_0 \\
+      &= \sum_{q = 1}^{\infty} (q p_{q - 1} - (1 + q) p_q) z^q - p_0 \\
+      &= \sum_{q = 1}^{\infty} 2 p_q z^q - p_0 \\
+      &= \sum_{q = 0}^{\infty} 2 p_q z^q - 2p_0 - p_0 \\
+      &= \sum_{q = 0}^{\infty} 2 p_q z^q - 3p_0 \\
+      &= 2g_0(z) - 2 && p_0 = 2 / 3 \\
+    \end{aligned} \\
+    \boxed{g_0(z) = 1 + \frac{1}{2} (z - 1)(z g_0'(z) + g_0(z))}
+  \end{gather*}
+
+  \item[(c)]
+  \begin{align*}
+    \frac{dh}{dz} &= \left( \frac{d}{dz} z^3 g_0(z) \right) (1 - z)^{-2} + z^3 g_0(z) \frac{d}{dz} (1 - z)^{-2} \\
+    &= (3z^2 g_0(z) + z^3 g_0'(z)) (1 - z)^{-2} + z^3 g_0(z) (-2) (1 - z)^{-3} (-1) \\
+    &= (3z^2 g_0(z) + z^3 g_0'(z)) (1 - z)^{-2} + 2z^3 g_0(z) (1 - z)^{-3} \\
+    &= \frac{(3z^2 g_0(z) + z^3 g_0'(z))(1 - z) + 2z^3 g_0(z)}{(1 - z)^3} \\
+    &= \frac{3z^2 g_0(z) + z^3 g_0'(z) - 3z^3 g_0(z) - z^4 g_0'(z) + 2z^3 g_0(z)}{(1 - z)^3} \\
+    &= \frac{3z^2 g_0(z) + z^3 g_0'(z) - z^3 g_0(z) - z^4 g_0'(z)}{(1 - z)^3} \\
+    &= \frac{z^2 (3g_0(z) + z g_0'(z) - z g_0(z) - z^2 g_0'(z)}{(1 - z)^3)} \\
+    &= \frac{z^2 (2g_0(z) + g_0(z) + z g_0'(z) - z g_0(z) - z^2 g_0'(z))}{(1 - z)^3} \\
+    &= \frac{z^2 (2g_0(z) + (1 - z) g_0(z) + (1 - z) z g_0'(z))}{(1 - z)^3} \\
+    &= \frac{z^2 (2g_0(z) + (1 - z) g_0(z) + (1 - z) z g_0'(z))}{(1 - z)^3} \\
+    &= \frac{z^2 (2g_0(z) - 2(g_0(z) - 1))}{(1 - z)^3} \\
+    &= \frac{2z^2}{(1 - z)^3} \\
+  \end{align*}
+
+  \item[(d)]
+  TODO
+\end{enumerate}
+
+\newpage
+
+\subsection*{Exercise 2}
+
+\begin{enumerate}
+  \item[(a)]
+  \begin{align*}
+    Q &= \sum_{t \in \set{1, 2}} (e_t - a_t^2) \\
+    &= (e_1 - a_1^2) + (e_2 - a_2^2) \\
+    &= \left( \frac{r - 1}{n - 1} - \left( \frac{2(r - 1) + 1}{2(n - 1)} \right)^2
+    \right) + \left( \frac{n - r - 1}{n - 1} - \left( \frac{2(n - r - 1) + 1}{2(n
+    - 1)} \right)^2 \right) \\
+    &= \frac{n - 2}{n - 1} - \frac{(2r - 1)^2}{4(n - 1)^2} - \frac{(2(n - r) -
+    1)^2}{4(n - 1)^2} \\
+    &= \frac{4(n - 1)(n - 2)}{4(n - 1)^2} - \frac{(2r - 1)^2}{4(n - 1)^2} - \frac{(2(n - r) - 1)^2}{4(n - 1)^2} \\
+    &= \frac{4n^2 - 12n + 8}{4(n - 1)^2} - \frac{4r^2 - 4r + 1}{4(n - 1)^2} - \frac{4(n - r)^2 - 4(n - r) + 1}{4(n - 1)^2} \\
+    &= \frac{4n^2 - 12n + 8}{4(n - 1)^2} - \frac{4r^2 - 4r + 1}{4(n - 1)^2} - \frac{4n^2 - 8nr + 4r^2 - 4n + 4r + 1}{4(n - 1)^2} \\
+    &= \frac{-8n + 6}{4(n - 1)^2} - \frac{8r^2}{4(n - 1)^2} - \frac{-8nr}{4(n - 1)^2} \\
+    &= \frac{-8n + 6 - 8r^2 + 8nr}{4(n - 1)^2} \\
+    &= \frac{3 - 4n + 4rn - 4r^2}{2(n - 1)^2}
+  \end{align*}
+
+  \item[(b)]
+  \begin{gather*}
+    \frac{dQ}{dr} = \frac{4n - 8r}{2(n - 1)^2}
+  \end{gather*}
+  The critical value of this is \( r = n / 2 \), thus it is optimal to divide
+  down the middle.
+\end{enumerate}
+
+\newpage
+
+\subsection*{Exercise 3}
+
+\newpage
+
+\subsection*{Exercise 4}
+
+\begin{enumerate}
+  \item[(a)]
+  Since there are no self loops, each triangle gives 2 3-paths from a node to
+  itself for each of the 3 vertices, so the total number of triangles is \( 8
+  \cdot 6 / 6 = \boxed{8} \).
+
+  \item[(b)]
+  The total number of 2-paths is \( 2 \cdot (2 \cdot 12 + 4 \cdot 3) = 72 \).
+  The global clustering coefficient is \( 8 \cdot 6 / 72 = \boxed{2 / 3} \).
+\end{enumerate}
+
+\newpage
+
+\subsection*{Exercise 5}
+
+\begin{enumerate}
+  \item[(a)]
+  \begin{gather*}
+    g_0(z) = \sum_{k = 0}^{\infty} p_k z^k \\
+    g_0'(z) = \sum_{k = 0}^{\infty} k p_k z^{k - 1} \\
+    g_0'(1) = \sum_{k = 0}^{\infty} k p_k = \angles{k} \\
+    g_0''(z) = \sum_{k = 0}^{\infty} k(k - 1) p_k z^{k - 2} \\
+    g_0''(1) = \sum_{k = 0}^{\infty} k(k - 1) p_k = \angles{k(k - 1)}
+  \end{gather*}
+
+  \item[(b)]
+  Condition:
+  \begin{gather*}
+    \angles{k^2} > 2 \angles{k} \\
+    \sum_{k = 0}^{\infty} k^2 p_k > 2 \sum_{k = 0}^{\infty} k p_k \\
+    \sum_{k = 0}^{\infty} (k^2 - k) p_k > \sum_{k = 0}^{\infty} k p_k \\
+    \angles{k^2 - k} > \angles{k} \\
+    g_0''(1) > g_0'(1)
+  \end{gather*}
+  Find \( g_0', g_0'' \):
+  \begin{align*}
+    g_0'(z) &= p(-1)(1 - qz)^{-2}(-q) \\
+    &= pq(1 - qz)^{-2} \\
+    &= \frac{pq}{(1 - qz)^2} \\
+    g_0'(1) &= \frac{pq}{(1 - q)^2} \\
+    g_0''(z) &= pq(-2)(1 - qz)^{-3}(-q) \\
+    &= \frac{2pq^2}{(1 - qz)^3} \\
+    g_0''(1) &= \frac{2pq^2}{(1 - q)^3}
+  \end{align*}
+  \begin{gather*}
+    \frac{2pq^2}{(1 - q)^3} > \frac{pq}{(1 - q)^2} \\
+    \frac{2p(1 - p)^2}{p^3} > \frac{p(1 - p)}{p^2} \\
+    2(1 - p) > p \\
+    \boxed{p < \frac{2}{3}}
+  \end{gather*}
+\end{enumerate}
+
+\newpage
+
+\subsection*{Exercise 6}
+
+\begin{enumerate}
+  \item[(a)]
+  Let \( X \) be a random variable representing the current degree, \( n \) be
+  the total number of nodes. \( q_k \) is the probability that a neighbor has \(
+  k \) excess degrees.
+  \begin{gather*}
+    q_k = \frac{n (k + 1) p_{k + 1}}{n \angles{k}}
+  \end{gather*}
+  Here, \( n(k + 1) p_{k + 1} \) is the total number of degrees that belong to
+  nodes with degree \( k + 1 \), and \( n \angles{k} \) is the total degree over
+  all nodes. The fraction represents the probability that an edge from the
+  current node is attached to a degree \( k + 1 \) node. Simplify the
+  expression, and we get
+  \begin{gather*}
+    q_k = \frac{(k + 1) p_{k + 1}}{\angles{k}}
+  \end{gather*}
+
+  \item[(b)]
+  \begin{gather*}
+    \angles{k} = 1 \cdot p + 3(1 - p) = 3 - 2p \\
+    \begin{aligned}
+      \sum_{k = 0}^{\infty} k q_k &= \sum_{k = 0}^{\infty} k \frac{(k + 1) p_{k + 1}}{\angles{k}} \\
+      &= \frac{1(1 + 1)p + 3(3 + 1)(1 - p)}{3 - 2p} \\
+      &= \frac{2p + 12 - 12p}{3 - 2p} \\
+      &= \boxed{\frac{12 - 10p}{3 - 2p}}
+    \end{aligned}
+  \end{gather*}
+\end{enumerate}
+
+\newpage
+
+\subsection*{Exercise 7}
+
+\begin{enumerate}
+  \item[(a)]
+  Every node initially has degree \( n - 1 \). Later, each node gains an average
+  of \( np \) degrees as it gains edges to the other cluster. Thus, the average
+  degree is \( \boxed{n - 1 + np} \).
+
+  \item[(b)]
+  Initially, there are \( 2 \binom{n}{2} = n(n - 1) \) edges. Later, each of the
+  \( n^2 \) candidates is added with uniform probability \( p \), so the
+  expected number of edges is \( \boxed{n(n - 1) + n^2 p} \).
+
+  \item[(c)]
+  \begin{gather*}
+    \begin{bmatrix}
+      0 & 1 & 1 & 1 & p & p & p & p \\
+      1 & 0 & 1 & 1 & p & p & p & p \\
+      1 & 1 & 0 & 1 & p & p & p & p \\
+      1 & 1 & 1 & 0 & p & p & p & p \\
+      p & p & p & p & 0 & 1 & 1 & 1 \\
+      p & p & p & p & 1 & 0 & 1 & 1 \\
+      p & p & p & p & 1 & 1 & 0 & 1 \\
+      p & p & p & p & 1 & 1 & 1 & 0 \\
+    \end{bmatrix}
+  \end{gather*}
+  \begin{align*}
+    Q &= \frac{1}{2m} \sum_{i,j} \left( A_{ij} - \frac{k_i k_j}{2m} \right) \delta_{g_i g_j} \\
+    &= \frac{1}{2n(n - 1) + 2n^2 p} \sum_{i,j} \left( A_{ij} - \frac{n - 1 + np}{2n(n - 1) + 2n^2 p} \right) \delta_{g_i g_j} \\
+    &= \frac{1}{2n(n - 1) + 2n^2 p} \sum_{i,j} \left( A_{ij} - \frac{1}{2n} \right) \delta_{g_i g_j} \\
+    &= \frac{1}{2n(n - 1) + 2n^2 p} \left( \sum_{i,j} A_{ij} \delta_{g_i g_j} - \frac{1}{2n} \sum_{i,j} \delta_{g_i g_j} \right) \\
+    &= \frac{1}{2n(n - 1) + 2n^2 p} \left( n(n - 1) - \frac{n}{2} \right) \\
+    &= \frac{1}{2(n - 1) + 2n p} \left( n - 1 - \frac{1}{2} \right) \\
+    &= \boxed{\frac{n - 3/2}{2(n - 1) + 2n p}}
+  \end{align*}
+\end{enumerate}
+
+\end{document}
